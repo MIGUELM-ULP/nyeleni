@@ -2,1272 +2,924 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Página educativa sobre la Declaración de Nyéléni y la soberanía alimentaria.">
-    <title>Declaración de Nyéléni | Soberanía Alimentaria</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --verde: #315c3b;
-            --verde-oscuro: #1d3928;
-            --verde-claro: #e8f0e6;
-            --crema: #f8f5eb;
-            --tierra: #a66b3f;
-            --texto: #303b32;
-            --blanco: #ffffff;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--crema);
-            color: var(--texto);
-            line-height: 1.7;
-        }
-
-        html {
-            scroll-padding-top: 85px;
-        }
-
-        /* MENÚ DE NAVEGACIÓN */
-
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--verde-oscuro);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-        }
-
-        .logo {
-            color: white;
-            font-size: 23px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #d4bd8b;
-        }
-
-        /* PORTADA */
-
-        .hero {
-            min-height: 580px;
-            background:
-                linear-gradient(rgba(15,35,20,0.65), rgba(15,35,20,0.7)),
-                url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=85");
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 6vw, 68px);
-            margin-bottom: 20px;
-            line-height: 1.15;
-        }
-
-        .hero p {
-            font-size: 20px;
-            max-width: 750px;
-            margin: auto;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            background: #d6b77b;
-            color: #263b29;
-            padding: 8px 20px;
-            border-radius: 30px;
-            margin-bottom: 25px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .hero-button {
-            display: inline-block;
-            margin-top: 30px;
-            background: #d6b77b;
-            color: #203927;
-            padding: 13px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .hero-button:hover {
-            background: white;
-            transform: translateY(-3px);
-        }
-
-        /* CONTENIDO GENERAL */
-
-        section {
-            padding: 75px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-title span {
-            color: var(--tierra);
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 2px;
-            font-size: 13px;
-        }
-
-        .section-title h2 {
-            color: var(--verde);
-            font-size: clamp(28px, 4vw, 40px);
-            margin-top: 8px;
-        }
-
-        .section-title p {
-            max-width: 750px;
-            margin: 12px auto 0;
-            color: #657067;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* INTRODUCCIÓN */
-
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .intro-grid img {
-            width: 100%;
-            height: 370px;
-            object-fit: cover;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.13);
-        }
-
-        .intro-text h3 {
-            color: var(--verde);
-            font-size: 26px;
-            margin-bottom: 15px;
-        }
-
-        .intro-text p {
-            margin-bottom: 15px;
-        }
-
-        /* TARJETAS */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.13);
-        }
-
-        .card img {
-            width: 100%;
-            height: 190px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 23px;
-        }
-
-        .card h3 {
-            color: var(--verde);
-            margin-bottom: 10px;
-        }
-
-        /* CONTEXTO HISTÓRICO */
-
-        .history {
-            background: var(--verde-oscuro);
-            color: white;
-        }
-
-        .history .section-title h2,
-        .history .section-title p {
-            color: white;
-        }
-
-        .history-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-        }
-
-        .history-item {
-            border-left: 4px solid #d6b77b;
-            padding: 20px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 0 12px 12px 0;
-        }
-
-        .history-item h3 {
-            color: #e4c98f;
-            font-size: 25px;
-            margin-bottom: 10px;
-        }
-
-        /* DEFINICIÓN */
-
-        .definition {
-            background: var(--verde-claro);
-        }
-
-        .definition-box {
-            max-width: 950px;
-            margin: auto;
-            padding: 40px;
-            background: white;
-            border-radius: 18px;
-            border-left: 7px solid var(--verde);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        }
-
-        .definition-box p {
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .definition-box strong {
-            color: var(--verde);
-        }
-
-        /* PRINCIPIOS */
-
-        .principle-number {
-            background: var(--verde);
-            color: white;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .principle-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 16px rgba(0,0,0,0.07);
-            border-bottom: 4px solid #8b9d70;
-        }
-
-        .principle-card h3 {
-            color: var(--verde);
-            margin-bottom: 10px;
-        }
-
-        /* OBJETIVOS */
-
-        .objectives {
-            background: #f0eadb;
-        }
-
-        .objective-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .objective {
-            background: white;
-            padding: 22px;
-            border-radius: 12px;
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .objective-icon {
-            font-size: 28px;
-        }
-
-        .objective h3 {
-            color: var(--verde);
-            margin-bottom: 5px;
-        }
-
-        /* COMPARACIÓN */
-
-        .comparison {
-            overflow-x: auto;
-        }
-
-        .comparison table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .comparison th {
-            background: var(--verde);
-            color: white;
-            padding: 18px;
-            text-align: left;
-        }
-
-        .comparison td {
-            padding: 17px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .comparison tr:nth-child(even) {
-            background: #f0f4ed;
-        }
-
-        /* COLOMBIA */
-
-        .colombia {
-            background: var(--verde-claro);
-        }
-
-        .colombia-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 35px;
-            align-items: center;
-        }
-
-        .colombia-grid img {
-            width: 100%;
-            height: 390px;
-            object-fit: cover;
-            border-radius: 18px;
-        }
-
-        .colombia-text h3 {
-            color: var(--verde);
-            font-size: 27px;
-            margin-bottom: 15px;
-        }
-
-        .colombia-text ul {
-            padding-left: 22px;
-            margin-top: 15px;
-        }
-
-        .colombia-text li {
-            margin-bottom: 10px;
-        }
-
-        /* GALERÍA */
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
-            border-radius: 13px;
-            transition: 0.3s;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.03);
-        }
-
-        /* DESAFÍOS */
-
-        .challenge-card {
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            border-top: 5px solid var(--tierra);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-        }
-
-        .challenge-card h3 {
-            color: var(--verde);
-            margin-bottom: 10px;
-        }
-
-        /* CONCLUSIÓN */
-
-        .conclusion {
-            background:
-                linear-gradient(rgba(22,48,29,0.88), rgba(22,48,29,0.88)),
-                url("https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=80");
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-        }
-
-        .conclusion h2 {
-            font-size: 38px;
-            margin-bottom: 20px;
-        }
-
-        .conclusion p {
-            max-width: 850px;
-            margin: auto;
-            font-size: 18px;
-        }
-
-        /* BIBLIOGRAFÍA */
-
-        .references {
-            background: #f0eadb;
-        }
-
-        .reference {
-            background: white;
-            padding: 23px;
-            border-radius: 12px;
-            margin-bottom: 18px;
-            border-left: 5px solid var(--verde);
-            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-        }
-
-        .reference h3 {
-            color: var(--verde);
-            font-size: 17px;
-            margin-bottom: 8px;
-        }
-
-        .reference a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #8b572f;
-            font-weight: bold;
-            text-decoration: none;
-            overflow-wrap: anywhere;
-        }
-
-        .reference a:hover {
-            text-decoration: underline;
-        }
-
-        /* PIE DE PÁGINA */
-
-        footer {
-            background: #172c1e;
-            color: white;
-            text-align: center;
-            padding: 30px 15px;
-        }
-
-        footer p {
-            margin: 5px;
-            font-size: 14px;
-        }
-
-        .back-top {
-            display: inline-block;
-            margin-top: 15px;
-            color: #e4c98f;
-            text-decoration: none;
-        }
-
-        /* RESPONSIVE */
-
-        @media (max-width: 800px) {
-            nav {
-                justify-content: center;
-                gap: 12px;
-            }
-
-            nav ul {
-                justify-content: center;
-            }
-
-            .intro-grid,
-            .colombia-grid {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 55px 6%;
-            }
-
-            .hero {
-                min-height: 500px;
-            }
-
-            .definition-box {
-                padding: 25px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            nav ul {
-                gap: 10px;
-            }
-
-            nav a {
-                font-size: 12px;
-            }
-
-            .hero p {
-                font-size: 17px;
-            }
-
-            .comparison table {
-                min-width: 650px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Presentación académica sobre la Declaración de Nyéléni y la soberanía alimentaria.">
+<title>Declaración de Nyéléni | Soberanía Alimentaria</title>
+
+<style>
+:root {
+    --verde: #234b35;
+    --verde-claro: #507b50;
+    --oliva: #87965b;
+    --crema: #f5f0e5;
+    --tierra: #a66c45;
+    --blanco: #ffffff;
+    --texto: #29382d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--crema);
+    color: var(--texto);
+    line-height: 1.7;
+}
+
+header {
+    background: var(--verde);
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #d8c79c;
+}
+
+.hero {
+    min-height: 570px;
+    background:
+    linear-gradient(rgba(15,42,26,.75),rgba(15,42,26,.75)),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 70px);
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.hero p {
+    font-size: 20px;
+    max-width: 720px;
+    margin-bottom: 30px;
+}
+
+.etiqueta {
+    color: #e4d4a9;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.boton {
+    display: inline-block;
+    padding: 13px 25px;
+    background: #d5bd85;
+    color: #253b2b;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.boton:hover {
+    background: white;
+}
+
+section {
+    padding: 75px 9%;
+    scroll-margin-top: 85px;
+}
+
+.seccion-oscura {
+    background: var(--verde);
+    color: white;
+}
+
+.subtitulo {
+    color: var(--tierra);
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.seccion-oscura .subtitulo {
+    color: #d5bd85;
+}
+
+h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: 25px;
+    color: var(--verde);
+}
+
+.seccion-oscura h2 {
+    color: white;
+}
+
+.intro {
+    max-width: 850px;
+    font-size: 18px;
+}
+
+.imagen-principal {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    border-bottom: 4px solid var(--oliva);
+    box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.card h3 {
+    color: var(--verde);
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.icono {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.fecha {
+    display: inline-block;
+    background: var(--oliva);
+    color: white;
+    padding: 7px 15px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.cita {
+    background: #e7dfc9;
+    border-left: 6px solid var(--tierra);
+    padding: 25px;
+    margin: 30px 0;
+    font-size: 21px;
+    font-style: italic;
+}
+
+.seccion-oscura .cita {
+    background: #315b40;
+    color: white;
+}
+
+.lista {
+    margin: 20px 0 0 25px;
+}
+
+.lista li {
+    margin-bottom: 12px;
+}
+
+.comparacion {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: white;
+    color: var(--texto);
+}
+
+.comparacion th {
+    background: var(--verde);
+    color: white;
+    padding: 16px;
+    text-align: left;
+}
+
+.comparacion td {
+    padding: 16px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.comparacion tr:nth-child(even) {
+    background: #f1eee5;
+}
+
+.bloque {
+    background: #e9e3d3;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.conclusion {
+    background: #315b40;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.referencia {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+}
+
+.referencia a {
+    color: #315b40;
+}
+
+/* PRESENTACIÓN ACADÉMICA */
+
+.presentacion-academica {
+    background: #faf9f5;
+    padding: 55px 9%;
+    font-family: Arial, sans-serif;
+}
+
+.datos-academicos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.dato-academico {
+    border: 1px solid #cbd7c6;
+    border-radius: 25px;
+    padding: 20px 22px;
+    background: rgba(255,255,255,0.45);
+}
+
+.dato-academico h3 {
+    color: #315b40;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 9px;
+    text-transform: uppercase;
+}
+
+.dato-academico p {
+    color: #172e21;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.frase-final {
+    grid-column: 1 / -1;
+    background: #e9ede2;
+    border: 1px solid #aebfa5;
+    border-left: 6px solid #63855f;
+    border-radius: 25px;
+    padding: 22px;
+}
+
+.frase-final h3 {
+    color: #63855f;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.frase-final p {
+    color: #29382d;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+footer {
+    background: #172e21;
+    color: white;
+    text-align: center;
+    padding: 35px 10%;
+}
+
+footer p {
+    margin: 8px;
+}
+
+@media(max-width: 650px) {
+    header {
+        position: relative;
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    .hero {
+        min-height: 480px;
+        padding: 55px 7%;
+    }
+
+    section {
+        padding: 55px 7%;
+    }
+
+    .comparacion {
+        font-size: 13px;
+    }
+
+    .comparacion th,
+    .comparacion td {
+        padding: 9px;
+    }
+
+    .presentacion-academica {
+        padding: 40px 6%;
+    }
+
+    .datos-academicos {
+        grid-template-columns: 1fr;
+    }
+
+    .frase-final {
+        grid-column: auto;
+    }
+
+    .dato-academico p {
+        font-size: 17px;
+    }
+
+    .frase-final p {
+        font-size: 19px;
+    }
+}
+
+@media print {
+    header, .boton {
+        display: none;
+    }
+
+    section {
+        break-inside: avoid;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- MENÚ PRINCIPAL -->
+<!-- MENÚ PRINCIPAL -->
 
+<header>
+    <div class="logo">🌱 NYÉLÉNI</div>
     <nav>
-        <div class="logo">NYÉLÉNI 2007</div>
-
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#introduccion">Introducción</a></li>
-            <li><a href="#historia">Origen</a></li>
-            <li><a href="#concepto">Concepto</a></li>
-            <li><a href="#principios">Principios</a></li>
-            <li><a href="#colombia">Colombia</a></li>
-            <li><a href="#bibliografia">Bibliografía</a></li>
-        </ul>
+        <a href="#inicio">Inicio</a>
+        <a href="#presentacion">Integrantes</a>
+        <a href="#introduccion">Introducción</a>
+        <a href="#origen">Origen</a>
+        <a href="#concepto">Concepto</a>
+        <a href="#principios">Principios</a>
+        <a href="#colombia">Colombia</a>
+        <a href="#conclusiones">Conclusiones</a>
+        <a href="#bibliografia">Bibliografía</a>
     </nav>
+</header>
 
-    <!-- PORTADA -->
+<!-- PORTADA -->
 
-    <header class="hero" id="inicio">
-        <div class="hero-content">
-            <span class="hero-tag">ALIMENTACIÓN • TERRITORIO • JUSTICIA SOCIAL</span>
-
-            <h1>Declaración de Nyéléni</h1>
-
-            <p>
-                La soberanía alimentaria como derecho de los pueblos
-                a decidir sus propios sistemas de producción,
-                distribución y consumo de alimentos.
-            </p>
-
-            <a href="#introduccion" class="hero-button">
-                Explorar contenido
-            </a>
-        </div>
-    </header>
-
-    <!-- INTRODUCCIÓN -->
-
-    <section id="introduccion">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Conociendo la declaración</span>
-                <h2>¿Qué es la Declaración de Nyéléni?</h2>
-                <p>
-                    Una propuesta colectiva que busca transformar
-                    la manera en que se producen, distribuyen y consumen
-                    los alimentos en el mundo.
-                </p>
-            </div>
-
-            <div class="intro-grid">
-
-                <div class="intro-text">
-                    <h3>Un movimiento por el derecho a decidir</h3>
-
-                    <p>
-                        La Declaración de Nyéléni es un documento construido
-                        por organizaciones campesinas, indígenas, pescadores,
-                        trabajadores rurales, mujeres y diferentes movimientos
-                        sociales comprometidos con la soberanía alimentaria.
-                    </p>
-
-                    <p>
-                        Su propósito principal es defender el derecho de los
-                        pueblos a decidir cómo producir sus alimentos, qué
-                        alimentos consumir y cómo organizar sus propios
-                        sistemas alimentarios.
-                    </p>
-
-                    <p>
-                        También promueve una agricultura sostenible, el respeto
-                        por la biodiversidad, la protección de los territorios
-                        y el reconocimiento del trabajo de las comunidades
-                        productoras de alimentos.
-                    </p>
-                </div>
-
-                <img
-                    src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=1000&q=85"
-                    alt="Cultivos agrícolas y producción de alimentos">
-            </div>
-        </div>
-    </section>
-
-    <!-- ORIGEN HISTÓRICO -->
-
-    <section class="history" id="historia">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Antecedentes históricos</span>
-                <h2>Origen de Nyéléni</h2>
-                <p>
-                    El encuentro internacional que fortaleció el movimiento
-                    mundial por la soberanía alimentaria.
-                </p>
-            </div>
-
-            <div class="history-grid">
-
-                <div class="history-item">
-                    <h3>1996</h3>
-                    <p>
-                        La Vía Campesina presenta el concepto de soberanía
-                        alimentaria durante la Cumbre Mundial sobre la
-                        Alimentación en Roma.
-                    </p>
-                </div>
-
-                <div class="history-item">
-                    <h3>2007</h3>
-                    <p>
-                        Se realiza el Foro Mundial por la Soberanía Alimentaria
-                        en Sélingué, Malí, del 23 al 27 de febrero.
-                    </p>
-                </div>
-
-                <div class="history-item">
-                    <h3>500+</h3>
-                    <p>
-                        Participaron más de 500 representantes de organizaciones
-                        y movimientos sociales provenientes de más de 80 países.
-                    </p>
-                </div>
-
-                <div class="history-item">
-                    <h3>Resultado</h3>
-                    <p>
-                        El encuentro permitió construir una visión colectiva
-                        y fortalecer las propuestas de soberanía alimentaria.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CONCEPTO -->
-
-    <section class="definition" id="concepto">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Concepto fundamental</span>
-                <h2>¿Qué es la soberanía alimentaria?</h2>
-            </div>
-
-            <div class="definition-box">
-                <p>
-                    La soberanía alimentaria es el
-                    <strong>derecho de los pueblos a alimentos nutritivos,
-                    culturalmente adecuados, accesibles y producidos de forma
-                    sostenible</strong>, así como el derecho a decidir sus
-                    propios sistemas alimentarios y productivos.
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PRINCIPIOS -->
-
-    <section id="principios">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Fundamentos principales</span>
-                <h2>Principios de la soberanía alimentaria</h2>
-                <p>
-                    La Declaración de Nyéléni propone una transformación
-                    de los sistemas alimentarios basada en la justicia,
-                    la participación y la sostenibilidad.
-                </p>
-            </div>
-
-            <div class="cards">
-
-                <div class="principle-card">
-                    <div class="principle-number">1</div>
-                    <h3>Alimentos para los pueblos</h3>
-                    <p>
-                        Las necesidades alimentarias de las personas deben
-                        estar por encima de los intereses comerciales.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">2</div>
-                    <h3>Valorar a los productores</h3>
-                    <p>
-                        Reconocer y proteger el trabajo de campesinos,
-                        agricultores familiares, pescadores y comunidades rurales.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">3</div>
-                    <h3>Sistemas alimentarios locales</h3>
-                    <p>
-                        Fortalecer los mercados locales y acercar a quienes
-                        producen los alimentos con quienes los consumen.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">4</div>
-                    <h3>Control local</h3>
-                    <p>
-                        Defender el acceso de las comunidades a la tierra,
-                        el agua, las semillas y los recursos naturales.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">5</div>
-                    <h3>Conocimientos y saberes</h3>
-                    <p>
-                        Respetar los conocimientos tradicionales y promover
-                        prácticas agrícolas sostenibles.
-                    </p>
-                </div>
-
-                <div class="principle-card">
-                    <div class="principle-number">6</div>
-                    <h3>Trabajo con la naturaleza</h3>
-                    <p>
-                        Promover métodos de producción que protejan los
-                        ecosistemas y la biodiversidad.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- OBJETIVOS -->
-
-    <section class="objectives" id="objetivos">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Propósitos del movimiento</span>
-                <h2>Objetivos principales</h2>
-            </div>
-
-            <div class="objective-list">
-
-                <div class="objective">
-                    <div class="objective-icon">🌱</div>
-                    <div>
-                        <h3>Producción sostenible</h3>
-                        <p>
-                            Impulsar prácticas agrícolas que cuiden el suelo,
-                            el agua y los ecosistemas.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="objective">
-                    <div class="objective-icon">🌾</div>
-                    <div>
-                        <h3>Protección campesina</h3>
-                        <p>
-                            Reconocer los derechos y el trabajo de las
-                            comunidades productoras.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="objective">
-                    <div class="objective-icon">🌍</div>
-                    <div>
-                        <h3>Autonomía alimentaria</h3>
-                        <p>
-                            Fortalecer la capacidad de los pueblos para
-                            decidir sus sistemas alimentarios.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="objective">
-                    <div class="objective-icon">🤝</div>
-                    <div>
-                        <h3>Justicia social</h3>
-                        <p>
-                            Promover condiciones dignas para productores,
-                            trabajadores y consumidores.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="objective">
-                    <div class="objective-icon">🌽</div>
-                    <div>
-                        <h3>Protección de semillas</h3>
-                        <p>
-                            Defender la diversidad de semillas y los
-                            conocimientos tradicionales.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="objective">
-                    <div class="objective-icon">♻️</div>
-                    <div>
-                        <h3>Consumo responsable</h3>
-                        <p>
-                            Fomentar el consumo de alimentos locales,
-                            nutritivos y culturalmente apropiados.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SEGURIDAD VS SOBERANÍA -->
-
-    <section id="comparacion">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Dos conceptos relacionados</span>
-                <h2>Seguridad alimentaria y soberanía alimentaria</h2>
-                <p>
-                    Ambos conceptos se relacionan con el derecho a la
-                    alimentación, pero tienen enfoques diferentes.
-                </p>
-            </div>
-
-            <div class="comparison">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Aspecto</th>
-                            <th>Seguridad alimentaria</th>
-                            <th>Soberanía alimentaria</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Enfoque</td>
-                            <td>
-                                Busca que todas las personas tengan acceso
-                                físico y económico a alimentos suficientes.
-                            </td>
-                            <td>
-                                Defiende el derecho de los pueblos a decidir
-                                cómo organizar sus sistemas alimentarios.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Producción</td>
-                            <td>
-                                Se interesa por la disponibilidad y el acceso
-                                a los alimentos.
-                            </td>
-                            <td>
-                                Prioriza la producción sostenible y local,
-                                respetando las culturas y los territorios.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Productores</td>
-                            <td>
-                                Considera la disponibilidad de alimentos
-                                para la población.
-                            </td>
-                            <td>
-                                Destaca los derechos de campesinos,
-                                pescadores y productores locales.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Decisiones</td>
-                            <td>
-                                Se concentra en garantizar el acceso
-                                a una alimentación adecuada.
-                            </td>
-                            <td>
-                                Promueve la participación de las comunidades
-                                en las decisiones alimentarias.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Objetivo</td>
-                            <td>
-                                Garantizar que las personas puedan alimentarse.
-                            </td>
-                            <td>
-                                Garantizar el derecho a decidir cómo
-                                producir y consumir alimentos.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- COLOMBIA -->
-
-    <section class="colombia" id="colombia">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Contexto nacional</span>
-                <h2>Importancia de Nyéléni para Colombia</h2>
-            </div>
-
-            <div class="colombia-grid">
-
-                <img
-                    src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85"
-                    alt="Paisaje agrícola">
-
-                <div class="colombia-text">
-                    <h3>El campo colombiano y la alimentación</h3>
-
-                    <p>
-                        La soberanía alimentaria tiene especial importancia
-                        para Colombia debido a su diversidad agrícola,
-                        cultural y ambiental. El país cuenta con comunidades
-                        campesinas, indígenas y afrodescendientes que conservan
-                        conocimientos tradicionales relacionados con la
-                        producción y el consumo de alimentos.
-                    </p>
-
-                    <p>
-                        La propuesta de Nyéléni permite reflexionar sobre
-                        la necesidad de fortalecer la agricultura familiar,
-                        proteger los territorios y mejorar las condiciones
-                        de vida de quienes producen los alimentos.
-                    </p>
-
-                    <ul>
-                        <li>Apoyar a los pequeños productores.</li>
-                        <li>Proteger las semillas nativas y criollas.</li>
-                        <li>Fortalecer los mercados campesinos.</li>
-                        <li>Promover la agroecología.</li>
-                        <li>Proteger el agua y la biodiversidad.</li>
-                        <li>Reconocer los saberes de las comunidades rurales.</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- GALERÍA -->
-
-    <section id="galeria">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Imágenes relacionadas</span>
-                <h2>La soberanía alimentaria en imágenes</h2>
-                <p>
-                    La producción de alimentos, el trabajo campesino,
-                    los mercados locales y la protección ambiental
-                    son elementos fundamentales de este movimiento.
-                </p>
-            </div>
-
-            <div class="gallery">
-
-                <img
-                    src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=85"
-                    alt="Campo agrícola">
-
-                <img
-                    src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?auto=format&fit=crop&w=800&q=85"
-                    alt="Cultivos y agricultura">
-
-                <img
-                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=85"
-                    alt="Alimentos frescos">
-
-                <img
-                    src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=800&q=85"
-                    alt="Producción agrícola">
-
-                <img
-                    src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=800&q=85"
-                    alt="Mercado de alimentos">
-
-                <img
-                    src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=800&q=85"
-                    alt="Agricultura y cosecha">
-
-            </div>
-        </div>
-    </section>
-
-    <!-- DESAFÍOS -->
-
-    <section id="desafios">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Retos actuales</span>
-                <h2>Desafíos de la soberanía alimentaria</h2>
-                <p>
-                    Para avanzar hacia sistemas alimentarios más justos
-                    es necesario enfrentar diferentes dificultades.
-                </p>
-            </div>
-
-            <div class="cards">
-
-                <div class="challenge-card">
-                    <h3>Concentración de tierras</h3>
-                    <p>
-                        La desigualdad en el acceso a la tierra limita
-                        las posibilidades de producción de muchas
-                        comunidades campesinas.
-                    </p>
-                </div>
-
-                <div class="challenge-card">
-                    <h3>Cambio climático</h3>
-                    <p>
-                        Las sequías, inundaciones y cambios de temperatura
-                        afectan los cultivos y la disponibilidad de alimentos.
-                    </p>
-                </div>
-
-                <div class="challenge-card">
-                    <h3>Desigualdad económica</h3>
-                    <p>
-                        Muchos pequeños productores enfrentan dificultades
-                        para comercializar sus productos y obtener
-                        ingresos justos.
-                    </p>
-                </div>
-
-                <div class="challenge-card">
-                    <h3>Pérdida de biodiversidad</h3>
-                    <p>
-                        La reducción de variedades agrícolas y el deterioro
-                        ambiental amenazan la diversidad alimentaria.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CONCLUSIONES -->
-
-    <section class="conclusion" id="conclusiones">
-        <div class="container">
-
-            <h2>Conclusiones</h2>
-
-            <p>
-                La Declaración de Nyéléni representa una propuesta importante
-                para construir sistemas alimentarios más justos, sostenibles
-                y participativos. Su planteamiento reconoce que la alimentación
-                no debe entenderse únicamente como una actividad comercial,
-                sino como un derecho relacionado con la cultura, la salud,
-                el territorio y la vida de las comunidades.
-                <br><br>
-                Asimismo, permite comprender la importancia de proteger
-                el trabajo campesino, conservar los recursos naturales
-                y fortalecer la producción local. En Colombia, estos
-                principios invitan a valorar la agricultura familiar,
-                los conocimientos tradicionales y la diversidad de
-                nuestros territorios.
-            </p>
-
-        </div>
-    </section>
-
-    <!-- BIBLIOGRAFÍA -->
-
-    <section class="references" id="bibliografia">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Fuentes de consulta</span>
-                <h2>Bibliografía</h2>
-                <p>
-                    Fuentes utilizadas para desarrollar y complementar
-                    la información presentada en esta página.
-                </p>
-            </div>
-
-            <div class="reference">
-                <h3>1. Declaración oficial de Nyéléni (2007)</h3>
-
-                <p>
-                    Foro Mundial por la Soberanía Alimentaria. (2007).
-                    <em>Declaración de Nyéléni.</em>
-                    Sélingué, Malí.
-                </p>
-
-                <a href="https://nyeleni.org/es/declaracion-de-nyeleni/"
-                   target="_blank" rel="noopener">
-                    Consultar declaración oficial →
-                </a>
-            </div>
-
-            <div class="reference">
-                <h3>2. Movimiento internacional por la soberanía alimentaria</h3>
-
-                <p>
-                    Nyéléni. (s. f.).
-                    <em>Movimiento internacional por la soberanía alimentaria.</em>
-                </p>
-
-                <a href="https://nyeleni.org/es/international-movement-es/"
-                   target="_blank" rel="noopener">
-                    Consultar información →
-                </a>
-            </div>
-
-            <div class="reference">
-                <h3>3. Seguridad alimentaria: documento técnico de la FAO</h3>
-
-                <p>
-                    Organización de las Naciones Unidas para la Alimentación
-                    y la Agricultura (FAO). (2011).
-                    <em>Una introducción a los conceptos básicos de la
-                    seguridad alimentaria.</em>
-                </p>
-
-                <a href="https://www.fao.org/3/al936s/al936s00.pdf"
-                   target="_blank" rel="noopener">
-                    Consultar documento PDF oficial de la FAO →
-                </a>
-            </div>
-
-            <div class="reference">
-                <h3>4. Soberanía alimentaria y agroecología</h3>
-
-                <p>
-                    Organización de las Naciones Unidas para la Alimentación
-                    y la Agricultura (FAO). (s. f.).
-                    <em>Soberanía alimentaria y agroecología.</em>
-                </p>
-
-                <a href="https://www.fao.org/agroecology/new-knowledge-module/multimedia/detail/soberania-alimentaria-y-agroecolog%C3%ADa/en"
-                   target="_blank" rel="noopener">
-                    Consultar recurso de la FAO →
-                </a>
-            </div>
-
-            <div class="reference">
-                <h3>5. Más sobre la soberanía alimentaria</h3>
-
-                <p>
-                    Nyéléni. (s. f.).
-                    <em>Más sobre la soberanía alimentaria.</em>
-                </p>
-
-                <a href="https://nyeleni.org/es/mas-sobre-la-soberania-alimentaria/"
-                   target="_blank" rel="noopener">
-                    Consultar información complementaria →
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PIE DE PÁGINA -->
-
-    <footer>
-        <p><strong>DECLARACIÓN DE NYÉLÉNI — SOBERANÍA ALIMENTARIA</strong></p>
-
+<div class="hero" id="inicio">
+    <div class="hero-content">
+        <div class="etiqueta">Agricultura · Cultura · Justicia social</div>
+        <h1>Declaración de Nyéléni</h1>
         <p>
-            Una alimentación digna, sostenible y justa es un derecho
-            de todos los pueblos.
+            Soberanía alimentaria y el derecho de los pueblos
+            a decidir sobre su alimentación.
         </p>
+        <a class="boton" href="#introduccion">
+            Explorar presentación →
+        </a>
+    </div>
+</div>
 
-        <p>Material educativo e informativo.</p>
+<!-- PRESENTACIÓN ACADÉMICA -->
 
-        <a href="#inicio" class="back-top">Volver al inicio ↑</a>
-    </footer>
+<section class="presentacion-academica" id="presentacion">
+
+    <div class="datos-academicos">
+
+        <div class="dato-academico">
+            <h3>Integrantes</h3>
+            <p>
+                Juan Esteban Bonilla<br>
+                Miguel Ángel Moscoso<br>
+                Santiago Buitrago Monroy<br>
+                Sofía Maturana Hinestrosa
+            </p>
+        </div>
+
+        <div class="dato-academico">
+            <h3>Asignatura</h3>
+            <p>ANTROPOLOGÍA DE LA ALIMENTACIÓN</p>
+        </div>
+
+        <div class="dato-academico">
+            <h3>Docente</h3>
+            <p>Luis Felipe Giraldo</p>
+        </div>
+
+        <div class="dato-academico">
+            <h3>Universidad</h3>
+            <p>UNIVERSIDAD LIBRE - PEREIRA</p>
+        </div>
+
+        <div class="dato-academico">
+            <h3>Fecha</h3>
+            <p>30/11/2026</p>
+        </div>
+
+        <div class="frase-final">
+            <h3>Exposición final</h3>
+            <p>
+                «Alimentar a un pueblo no es solo producir más
+                alimentos: es decidir juntos qué comemos,
+                quién los produce y cómo cuidamos la tierra
+                que los hace posibles.»
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INTRODUCCIÓN -->
+
+<section id="introduccion">
+    <div class="subtitulo">01 · Introducción</div>
+    <h2>¿Qué es la Declaración de Nyéléni?</h2>
+
+    <p class="intro">
+        La Declaración de Nyéléni es un documento internacional
+        que establece principios fundamentales para defender
+        la soberanía alimentaria. Fue elaborada durante el Foro
+        Mundial por la Soberanía Alimentaria, celebrado en 2007
+        en Sélingué, Malí.
+    </p>
+
+    <p class="intro" style="margin-top:18px;">
+        Este documento reúne las perspectivas de campesinos,
+        pueblos indígenas, pescadores, trabajadores rurales
+        y movimientos sociales que buscan transformar los
+        sistemas alimentarios hacia modelos más justos,
+        sostenibles y participativos.
+    </p>
+
+    <div class="cita">
+        La alimentación no es solamente una necesidad:
+        también representa un derecho, una expresión cultural
+        y una cuestión de justicia social.
+    </div>
+</section>
+
+<!-- ORIGEN -->
+
+<section class="seccion-oscura" id="origen">
+    <div class="subtitulo">02 · Contexto histórico</div>
+    <h2>Origen de la Declaración</h2>
+
+    <span class="fecha">23 al 27 de febrero de 2007</span>
+
+    <p class="intro">
+        El Foro Mundial por la Soberanía Alimentaria tuvo lugar
+        en Sélingué, Malí, África. En este encuentro participaron
+        aproximadamente 500 representantes de organizaciones
+        y movimientos sociales de diferentes regiones del mundo.
+    </p>
+
+    <img class="imagen-principal"
+    src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1400&q=85"
+    alt="Paisaje natural y rural">
+
+    <div class="grid">
+        <div class="card">
+            <div class="icono">🌍</div>
+            <h3>Ubicación</h3>
+            <p>Sélingué, República de Malí, África.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🤝</div>
+            <h3>Participantes</h3>
+            <p>Organizaciones campesinas, indígenas y movimientos sociales.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🌾</div>
+            <h3>Propósito</h3>
+            <p>Defender el derecho de los pueblos a decidir sobre sus sistemas alimentarios.</p>
+        </div>
+    </div>
+
+    <div class="bloque">
+        <h3>¿Por qué se llamó Nyéléni?</h3>
+        <p>
+            Nyéléni es una figura tradicional de Malí asociada
+            con la agricultura y la cultura campesina.
+            Su nombre representa la resistencia, la identidad
+            y el reconocimiento del trabajo agrícola.
+        </p>
+    </div>
+</section>
+
+<!-- CONCEPTO -->
+
+<section id="concepto">
+    <div class="subtitulo">03 · Concepto central</div>
+    <h2>¿Qué es la soberanía alimentaria?</h2>
+
+    <p class="intro">
+        Es el derecho de los pueblos a definir sus propias políticas
+        y estrategias sostenibles de producción, distribución
+        y consumo de alimentos, respetando sus culturas,
+        territorios y necesidades.
+    </p>
+
+    <img class="imagen-principal"
+    src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=85"
+    alt="Campos agrícolas">
+
+    <div class="grid">
+        <div class="card">
+            <div class="icono">🌱</div>
+            <h3>Producción local</h3>
+            <p>Fortalecer la producción de alimentos en los territorios.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">👩‍🌾</div>
+            <h3>Productores</h3>
+            <p>Reconocer y proteger a los pequeños agricultores.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🥗</div>
+            <h3>Alimentación saludable</h3>
+            <p>Promover alimentos nutritivos y culturalmente apropiados.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">💧</div>
+            <h3>Recursos naturales</h3>
+            <p>Proteger el agua, los suelos, las semillas y la biodiversidad.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PRINCIPIOS -->
+
+<section class="seccion-oscura" id="principios">
+    <div class="subtitulo">04 · Fundamentos</div>
+    <h2>Principios fundamentales</h2>
+
+    <div class="grid">
+        <div class="card">
+            <div class="icono">🍎</div>
+            <h3>Alimentación como derecho</h3>
+            <p>Garantizar el acceso a alimentos suficientes, saludables y adecuados culturalmente.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🌍</div>
+            <h3>Acceso a la tierra</h3>
+            <p>Defender una distribución justa de la tierra y los territorios.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🌳</div>
+            <h3>Protección ambiental</h3>
+            <p>Conservar el agua, las semillas, los suelos y la biodiversidad.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🌾</div>
+            <h3>Producción sostenible</h3>
+            <p>Impulsar prácticas agrícolas responsables con los ecosistemas.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">⚖️</div>
+            <h3>Comercio justo</h3>
+            <p>Promover relaciones comerciales que beneficien a productores y consumidores.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🤝</div>
+            <h3>Participación social</h3>
+            <p>Incluir a las comunidades en las decisiones alimentarias.</p>
+        </div>
+    </div>
+</section>
+
+<!-- OBJETIVOS -->
+
+<section id="objetivos">
+    <div class="subtitulo">05 · Propósitos</div>
+    <h2>Objetivos de la soberanía alimentaria</h2>
+
+    <ul class="lista">
+        <li>Fortalecer la agricultura campesina y familiar.</li>
+        <li>Reducir la dependencia de las importaciones alimentarias.</li>
+        <li>Proteger las semillas nativas y los conocimientos tradicionales.</li>
+        <li>Garantizar condiciones laborales dignas para los trabajadores rurales.</li>
+        <li>Promover la igualdad de género en la agricultura.</li>
+        <li>Defender los territorios y los recursos naturales.</li>
+        <li>Impulsar sistemas alimentarios sostenibles y participativos.</li>
+    </ul>
+
+    <div class="cita">
+        Un sistema alimentario justo debe reconocer a quienes
+        producen los alimentos y proteger los recursos que
+        permiten producirlos.
+    </div>
+</section>
+
+<!-- COMPARACIÓN -->
+
+<section class="seccion-oscura" id="diferencias">
+    <div class="subtitulo">06 · Comparación conceptual</div>
+    <h2>Seguridad alimentaria y soberanía alimentaria</h2>
+
+    <p class="intro">
+        Son conceptos relacionados, pero presentan diferencias
+        importantes en sus enfoques y objetivos.
+    </p>
+
+    <table class="comparacion">
+        <tr>
+            <th>Seguridad alimentaria</th>
+            <th>Soberanía alimentaria</th>
+        </tr>
+
+        <tr>
+            <td>Busca garantizar la disponibilidad y el acceso a los alimentos.</td>
+            <td>Defiende el derecho de los pueblos a decidir sobre sus sistemas alimentarios.</td>
+        </tr>
+
+        <tr>
+            <td>Puede depender de la producción nacional o de las importaciones.</td>
+            <td>Prioriza la producción local y la autonomía de los territorios.</td>
+        </tr>
+
+        <tr>
+            <td>Se enfoca en la disponibilidad, el acceso, la utilización y la estabilidad.</td>
+            <td>Se enfoca en la participación, la autonomía y la justicia social.</td>
+        </tr>
+
+        <tr>
+            <td>Busca que las personas puedan alimentarse adecuadamente.</td>
+            <td>También cuestiona quién controla la producción y los recursos alimentarios.</td>
+        </tr>
+    </table>
+
+    <div class="bloque">
+        <h3>Una diferencia fundamental</h3>
+        <p>
+            La seguridad alimentaria pregunta si las personas
+            tienen acceso a alimentos. La soberanía alimentaria
+            también pregunta quién decide cómo se producen,
+            distribuyen y controlan esos alimentos.
+        </p>
+    </div>
+</section>
+
+<!-- COLOMBIA -->
+
+<section id="colombia">
+    <div class="subtitulo">07 · Aplicación territorial</div>
+    <h2>Importancia de Nyéléni para Colombia</h2>
+
+    <p class="intro">
+        Los principios de la Declaración de Nyéléni se relacionan
+        con diferentes desafíos de Colombia, especialmente
+        en materia de agricultura campesina, acceso a la tierra,
+        protección ambiental y alimentación saludable.
+    </p>
+
+    <img class="imagen-principal"
+    src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1400&q=85"
+    alt="Agricultura y cultivos">
+
+    <div class="grid">
+        <div class="card">
+            <div class="icono">👩‍🌾</div>
+            <h3>Agricultura campesina</h3>
+            <p>Reconocimiento del trabajo de las familias productoras.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🌽</div>
+            <h3>Semillas nativas</h3>
+            <p>Conservación de variedades tradicionales y conocimientos agrícolas.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🛒</div>
+            <h3>Mercados campesinos</h3>
+            <p>Fortalecimiento de la comercialización directa entre productores y consumidores.</p>
+        </div>
+
+        <div class="card">
+            <div class="icono">🌿</div>
+            <h3>Biodiversidad</h3>
+            <p>Protección de los ecosistemas y los recursos naturales.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEMÁTICAS -->
+
+<section class="seccion-oscura" id="desafios">
+    <div class="subtitulo">08 · Análisis crítico</div>
+    <h2>Problemáticas y desafíos actuales</h2>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Concentración de tierras</h3>
+            <p>La desigualdad en la distribución de tierras limita las oportunidades de pequeños agricultores.</p>
+        </div>
+
+        <div class="card">
+            <h3>Desigualdad económica</h3>
+            <p>Los pequeños productores enfrentan dificultades para competir en los mercados.</p>
+        </div>
+
+        <div class="card">
+            <h3>Pérdida de biodiversidad</h3>
+            <p>La desaparición de semillas tradicionales amenaza la diversidad agrícola.</p>
+        </div>
+
+        <div class="card">
+            <h3>Cambio climático</h3>
+            <p>Las alteraciones climáticas afectan los cultivos y la disponibilidad de agua.</p>
+        </div>
+
+        <div class="card">
+            <h3>Acceso a mercados</h3>
+            <p>Las dificultades de transporte y comercialización afectan los ingresos rurales.</p>
+        </div>
+
+        <div class="card">
+            <h3>Deterioro ambiental</h3>
+            <p>Las prácticas agrícolas intensivas pueden afectar los suelos y los ecosistemas.</p>
+        </div>
+    </div>
+
+    <div class="cita">
+        Producir más alimentos no es suficiente si no existen
+        condiciones justas para quienes los producen y
+        mecanismos que protejan el medioambiente.
+    </div>
+</section>
+
+<!-- CONCLUSIONES -->
+
+<section id="conclusiones">
+    <div class="subtitulo">09 · Reflexión final</div>
+    <h2>Conclusiones</h2>
+
+    <div class="conclusion">
+        <h3>Primera conclusión</h3>
+        <p>
+            La Declaración de Nyéléni representa un referente
+            internacional en la defensa de la soberanía
+            alimentaria y el derecho de los pueblos a decidir
+            sobre sus sistemas de producción y alimentación.
+        </p>
+    </div>
+
+    <div class="conclusion">
+        <h3>Segunda conclusión</h3>
+        <p>
+            Reconoce la importancia de los campesinos,
+            los pueblos indígenas, los pescadores y las
+            comunidades rurales en la producción de alimentos
+            y la conservación de conocimientos tradicionales.
+        </p>
+    </div>
+
+    <div class="conclusion">
+        <h3>Tercera conclusión</h3>
+        <p>
+            La soberanía alimentaria integra aspectos económicos,
+            sociales, culturales y ambientales, por lo que
+            requiere participación comunitaria y protección
+            de los recursos naturales.
+        </p>
+    </div>
+
+    <div class="conclusion">
+        <h3>Cuarta conclusión</h3>
+        <p>
+            En Colombia, estos principios pueden contribuir
+            al fortalecimiento de la agricultura campesina,
+            los mercados locales y la conservación
+            de la biodiversidad.
+        </p>
+    </div>
+
+    <div class="cita">
+        “Los pueblos no solamente tienen derecho a alimentarse,
+        también tienen derecho a decidir cómo se producen
+        sus alimentos”.
+    </div>
+</section>
+
+<!-- BIBLIOGRAFÍA -->
+
+<section class="seccion-oscura" id="bibliografia">
+    <div class="subtitulo">10 · Fuentes documentales</div>
+    <h2>Bibliografía</h2>
+
+    <p class="intro">
+        Fuentes para consultar los fundamentos históricos
+        y conceptuales de la soberanía alimentaria.
+    </p>
+
+    <div class="referencia">
+        <strong>1. Declaración original de Nyéléni (2007).</strong>
+        <p>Foro Mundial por la Soberanía Alimentaria. (2007, 27 de febrero). <em>Declaración de Nyéléni.</em></p>
+        <a href="https://nyeleni.org/spip.php?article291" target="_blank" rel="noopener">Consultar documento original</a>
+    </div>
+
+    <div class="referencia">
+        <strong>2. Organización de las Naciones Unidas para la Alimentación y la Agricultura.</strong>
+        <p>FAO. (s. f.). <em>Seguridad alimentaria y derecho a la alimentación.</em></p>
+        <a href="https://www.fao.org/" target="_blank" rel="noopener">Consultar sitio oficial de FAO</a>
+    </div>
+
+    <div class="referencia">
+        <strong>3. Comité de Seguridad Alimentaria Mundial.</strong>
+        <p>Comité de Seguridad Alimentaria Mundial. (s. f.). <em>Documentos y publicaciones sobre seguridad alimentaria y nutrición.</em></p>
+        <a href="https://www.fao.org/cfs/" target="_blank" rel="noopener">Consultar documentos institucionales</a>
+    </div>
+
+    <div class="referencia">
+        <strong>4. Foro Mundial por la Soberanía Alimentaria.</strong>
+        <p>Foro Mundial por la Soberanía Alimentaria. (2007). <em>Nyéléni 2007: Informe de síntesis.</em></p>
+        <a href="https://nyeleni.org/" target="_blank" rel="noopener">Consultar portal de Nyéléni</a>
+    </div>
+</section>
+
+<!-- PIE DE PÁGINA -->
+
+<footer>
+    <h2 style="color:white;">DECLARACIÓN DE NYÉLÉNI</h2>
+    <p>La soberanía alimentaria como derecho de los pueblos.</p>
+    <p>🌱 Agricultura · Alimentación · Justicia · Sostenibilidad</p>
+    <p>Presentación académica</p>
+    <p>Universidad Libre - Pereira</p>
+    <p>© 2026 - Material educativo</p>
+</footer>
 
 </body>
 </html>
